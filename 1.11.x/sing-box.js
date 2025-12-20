@@ -40,24 +40,6 @@ config.outbounds.map(i => {
   if (['☁️ℙ𝕚𝕜ℙ𝕒𝕜'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯)).*(?:新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
   }
-  if (['all', 'all-auto'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies))
-  }
-  if (['hk', 'hk-auto'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /港|hk|hongkong|hong kong|🇭🇰/i))
-  }
-  if (['tw', 'tw-auto'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /台|tw|taiwan|🇹🇼/i))
-  }
-  if (['jp', 'jp-auto'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /日本|jp|japan|🇯🇵/i))
-  }
-  if (['sg', 'sg-auto'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:us)).*(新|sg|singapore|🇸🇬)/i))
-  }
-  if (['us', 'us-auto'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|🇺🇸/i))
-  }
 })
 
 config.outbounds.forEach(outbound => {
