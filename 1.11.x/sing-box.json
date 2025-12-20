@@ -9,7 +9,7 @@
       {
         "tag": "google",
         "address": "https://8.8.8.8/dns-query",
-        "detour": "proxy"
+        "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "tag": "ali",
@@ -93,7 +93,7 @@
       {
         "clash_mode": "Global",
         "action": "route",
-        "outbound": "GLOBAL"
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "clash_mode": "Direct",
@@ -103,7 +103,7 @@
       {
         "rule_set": "bilibili_domain",
         "action": "route",
-        "outbound": "bilibili"
+        "outbound": "direct"
       },
       {
         "rule_set": [
@@ -111,22 +111,64 @@
           "netflix_domain"
         ],
         "action": "route",
-        "outbound": "netflix"
-      },
-      {
-        "rule_set": "bahamut_domain",
-        "action": "route",
-        "outbound": "bahamut"
+        "outbound": "🎬𝔼𝕞𝕓𝕪"
       },
       {
         "rule_set": "youtube_domain",
         "action": "route",
-        "outbound": "youtube"
+        "outbound": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
+      },
+      {
+        "rule_set": "tiktok_domain",
+        "action": "route",
+        "outbound": "🎧𝕋𝕚𝕜𝕥𝕠𝕜"
+      },
+            {
+        "rule_set": "twitter_domain",
+        "action": "route",
+        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
+      },
+      {
+        "rule_set": "spotify_domain",
+        "action": "route",
+        "outbound": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪"
       },
       {
         "rule_set": "openai_domain",
         "action": "route",
-        "outbound": "openai"
+        "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
+      },
+      {
+        "domain_suffix": [
+          "onyra.cc",
+          "v50.su",
+          "69yun69.com",
+          "tv.ash.yt",
+          "micu.hk"
+        ],
+        "domain": [
+          "emby.oceancloud.asia",
+          "cf.lilyemby.my",
+          "ashtv.huajia.xyz",
+          "yunti.online"
+        ],
+        "action": "route",
+        "outbound": "🎬𝔼𝕞𝕓𝕪"
+      },
+      {
+        "domain_suffix": [
+          "qmeng.top"
+        ],
+        "domain": [
+          "cdn.lilyemby.my"
+        ],
+        "action": "route",
+        "outbound": "direct"
+      },
+      {
+        "rule_set": "anti_ad",
+        "action": "route",
+        "outbound": "reject"
       },
       {
         "type": "logical",
@@ -139,7 +181,6 @@
             "invert": true,
             "rule_set": [
               "cn_domain",
-              "apple_domain",
               "google_domain",
               "telegram_domain",
               "netflix_domain"
@@ -147,7 +188,7 @@
           }
         ],
         "action": "route",
-        "outbound": "proxy"
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "action": "resolve"
@@ -158,7 +199,7 @@
           "telegram_domain"
         ],
         "action": "route",
-        "outbound": "telegram"
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "rule_set": [
@@ -166,7 +207,7 @@
           "google_domain"
         ],
         "action": "route",
-        "outbound": "google"
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "rule_set": [
@@ -174,7 +215,7 @@
           "apple_domain"
         ],
         "action": "route",
-        "outbound": "apple"
+        "outbound": "direct"
       },
       {
         "rule_set": [
@@ -182,10 +223,17 @@
           "cn_domain"
         ],
         "action": "route",
-        "outbound": "cn"
+        "outbound": "direct"
       }
     ],
     "rule_set": [
+      {
+        "tag": "anti_ad",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/anti-ad-sing-box.srs",
+        "download_detour": "direct"
+      },
       {
         "tag": "apple_ip",
         "type": "remote",
@@ -198,13 +246,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "bahamut_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bahamut.srs",
         "download_detour": "direct"
       },
       {
@@ -285,6 +326,27 @@
         "download_detour": "direct"
       },
       {
+        "tag": "spotify_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "tiktok_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/tiktok.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "twitter_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/twitter.srs",
+        "download_detour": "direct"
+      },
+      {
         "tag": "youtube_domain",
         "type": "remote",
         "format": "binary",
@@ -292,272 +354,42 @@
         "download_detour": "direct"
       }
     ],
-    "final": "final",
+    "final": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
     "auto_detect_interface": true
   },
   "outbounds": [
     {
-      "tag": "proxy",
-      "type": "selector",
-      "outbounds": [
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto",
-        "direct"
-      ],
-      "default": "all-auto"
-    },
-    {
-      "tag": "google",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "apple",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
-    },
-    {
-      "tag": "telegram",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "bilibili",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
-    },
-    {
-      "tag": "netflix",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "bahamut",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "youtube",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "openai",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "cn",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
-    },
-    {
-      "tag": "final",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "proxy"
-    },
-    {
-      "tag": "hk",
+      "tag": "🎬𝔼𝕞𝕓𝕪",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "tw",
+      "tag": "☁️ℙ𝕚𝕜ℙ𝕒𝕜",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "jp",
+      "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "sg",
+      "tag": "🎧𝕋𝕚𝕜𝕥𝕠𝕜",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "us",
+      "tag": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "all",
+      "tag": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "hk-auto",
+      "tag": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪",
       "type": "urltest",
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
@@ -565,7 +397,7 @@
       "tolerance": 50
     },
     {
-      "tag": "tw-auto",
+      "tag": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥",
       "type": "urltest",
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
@@ -573,61 +405,20 @@
       "tolerance": 50
     },
     {
-      "tag": "jp-auto",
+      "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
       "type": "urltest",
       "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
-    },
-    {
-      "tag": "sg-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "us-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "all-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
-    },
-    {
-      "tag": "GLOBAL",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "proxy",
-        "hk",
-        "hk-auto",
-        "tw",
-        "tw-auto",
-        "jp",
-        "jp-auto",
-        "sg",
-        "sg-auto",
-        "us",
-        "us-auto",
-        "all",
-        "all-auto"
-      ],
-      "default": "direct"
     },
     {
       "tag": "direct",
       "type": "direct"
+    },
+    {
+      "tag": "reject",
+      "type": "reject"
     }
   ],
   "inbounds": [
