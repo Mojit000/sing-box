@@ -106,7 +106,7 @@
         "outbound": "direct"
       },
       {
-        "domain_suffix": ["qmeng.top"],
+        "domain_suffix": ["qmeng.top","googleapis.cn","xn--ngstr-lra8j.com"],
         "action": "route",
         "outbound": "direct"
       },
@@ -116,22 +116,31 @@
         "outbound": "direct"
       },
       {
+        "rule_set": [
+          "cn_ip",
+          "cn_domain"
+        ],
+        "action": "route",
+        "outbound": "direct"
+      },
+      {
         "rule_set": "bilibili_domain",
         "action": "route",
-        "outbound": "☁️ℙ𝕚𝕜ℙ𝕒𝕜"
+        "outbound": "direct"
       },
+      {
+        "rule_set": "tiktok_domain",
+        "action": "route",
+        "outbound": "🎧𝕋𝕚𝕜𝕥𝕠𝕜"
+      },
+
       {
         "rule_set": [
           "netflix_ip",
           "netflix_domain"
         ],
         "action": "route",
-        "outbound": "🎬𝔼𝕞𝕓𝕪"
-      },
-      {
-        "rule_set": "bahamut_domain",
-        "action": "route",
-        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
+        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
       },
       {
         "rule_set": "youtube_domain",
@@ -144,28 +153,19 @@
         "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
       },
       {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "proxy_domain"
-          },
-          {
-            "invert": true,
-            "rule_set": [
-              "cn_domain",
-              "apple_domain",
-              "google_domain",
-              "telegram_domain",
-              "netflix_domain"
-            ]
-          }
-        ],
+        "rule_set": "spotify_domain",
         "action": "route",
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
+        "outbound": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪"
       },
       {
-        "action": "resolve"
+        "rule_set": "duolingo_domain",
+        "action": "route",
+        "outbound": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠"
+      },
+      {
+        "rule_set": "twitter_domain",
+        "action": "route",
+        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
       },
       {
         "rule_set": [
@@ -189,15 +189,35 @@
           "apple_domain"
         ],
         "action": "route",
-        "outbound": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠"
+        "outbound": "direct"
       },
       {
-        "rule_set": [
-          "cn_ip",
-          "cn_domain"
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "proxy_domain"
+          },
+          {
+            "invert": true,
+            "rule_set": [
+              "cn_domain",
+              "apple_domain",
+              "google_domain",
+              "telegram_domain",
+              "netflix_domain",
+              "tiktok_domain",
+              "spotify_domain",
+              "twitter_domain",
+              "duolingo_domain"
+            ]
+          }
         ],
         "action": "route",
-        "outbound": "direct"
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
+      },
+      {
+        "action": "resolve"
       }
     ],
     "rule_set": [
@@ -220,13 +240,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "bahamut_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bahamut.srs",
         "download_detour": "direct"
       },
       {
@@ -293,6 +306,13 @@
         "download_detour": "direct"
       },
       {
+        "tag": "spotify_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
+        "download_detour": "direct"
+      },
+      {
         "tag": "telegram_ip",
         "type": "remote",
         "format": "binary",
@@ -307,10 +327,31 @@
         "download_detour": "direct"
       },
       {
+        "tag": "tiktok_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/tiktok.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "twitter_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/twitter.srs",
+        "download_detour": "direct"
+      },
+      {
         "tag": "youtube_domain",
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/youtube.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "duolingo_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
         "download_detour": "direct"
       }
     ],
@@ -323,7 +364,7 @@
       "type": "block"
     },
     {
-      "tag": "🎬𝔼𝕞𝕓𝕪",
+      "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
       "type": "selector",
       "outbounds": []
     },
@@ -334,11 +375,6 @@
     },
     {
       "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "☁️ℙ𝕚𝕜ℙ𝕒𝕜",
       "type": "selector",
       "outbounds": []
     },
@@ -370,11 +406,8 @@
     },
     {
       "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-      "type": "urltest",
-      "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
+      "type": "selector",
+      "outbounds": []
     },
     {
       "tag": "direct",
@@ -386,7 +419,7 @@
       "type": "tun",
       "address": [
         "172.19.0.0/30",
-        "fdfe:dcba:9876::0/126"
+        "fdfe:dcba:9876::/126"
       ],
       "stack": "mixed",
       "auto_route": true,
