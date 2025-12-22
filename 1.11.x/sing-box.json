@@ -106,15 +106,39 @@
         "outbound": "direct"
       },
       {
-        "domain_suffix": ["qmeng.top","googleapis.cn","xn--ngstr-lra8j.com"],
+        "domain_suffix": [
+          "qmeng.top",
+          "googleapis.cn",
+          "xn--ngstr-lra8j.com"
+        ],
         "action": "route",
         "outbound": "direct"
       },
       {
-        "domain": ["cdn.lilyemby.my"],
+        "domain": [
+          "cdn.lilyemby.my"
+        ],
         "action": "route",
         "outbound": "direct"
       },
+      {
+        "domain_suffix": [
+          "v50.su",
+          "zox.show",
+          "69yun69.com"
+        ],
+        "action": "route",
+        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
+      },
+      {
+        "domain": [
+          "tv.ash.yt",
+          "ask.ash.yt",
+          "emby.oceancloud.asia"
+        ],
+        "action": "route",
+        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
+      },      
       {
         "rule_set": [
           "cn_ip",
@@ -124,7 +148,11 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "bilibili_domain",
+        "rule_set": [
+          "apple_ip",
+          "apple_domain",
+          "bilibili_domain"
+        ],
         "action": "route",
         "outbound": "direct"
       },
@@ -133,7 +161,6 @@
         "action": "route",
         "outbound": "🎧𝕋𝕚𝕜𝕥𝕠𝕜"
       },
-
       {
         "rule_set": [
           "netflix_ip",
@@ -170,26 +197,12 @@
       {
         "rule_set": [
           "telegram_ip",
-          "telegram_domain"
-        ],
-        "action": "route",
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
-      },
-      {
-        "rule_set": [
+          "telegram_domain",
           "google_ip",
           "google_domain"
         ],
         "action": "route",
         "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
-      },
-      {
-        "rule_set": [
-          "apple_ip",
-          "apple_domain"
-        ],
-        "action": "route",
-        "outbound": "direct"
       },
       {
         "type": "logical",
