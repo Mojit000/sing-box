@@ -157,7 +157,7 @@
       {
         "rule_set": "bilibili_domain",
         "action": "route",
-        "outbound": "☁️ℙ𝕚𝕜ℙ𝕒𝕜"
+        "outbound": "direct"
       },
       {
         "rule_set": [
