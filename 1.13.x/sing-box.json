@@ -57,7 +57,7 @@
           "AAAA"
         ],
         "server": "fakeip"
-      },
+      }
     ],
     "final": "google",
     "strategy": "prefer_ipv4",
