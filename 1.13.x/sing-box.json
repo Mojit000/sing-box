@@ -10,8 +10,7 @@
       {
         "tag": "google",
         "type": "https",
-        "server": "8.8.8.8",
-        "server_port": 443,
+        "server": "https://dns.google/dns-query",
         "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
@@ -33,29 +32,19 @@
         "server": "ali"
       },
       {
-        "clash_mode": "Global",
-        "server": "fakeip"
-      },
-      {
         "rule_set": "cn_ip",
-        "action": "route",
         "server": "ali"
       },
       {
         "rule_set": "cn_domain",
-        "action": "route",
         "server": "ali"
       },
       {
         "rule_set": "proxy_domain",
-        "action": "route",
         "server": "fakeip"
       },
       {
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
+        "clash_mode": "Global",
         "server": "fakeip"
       }
     ],
@@ -72,7 +61,7 @@
         "172.19.0.1/30",
         "fdfe:dcba:9876::/126"
       ],
-      "mtu": 1500,
+      "mtu": 1480,
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
@@ -92,6 +81,14 @@
     "default_domain_resolver": "ali",
     "rules": [
       {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "port": 53,
+        "action": "hijack-dns"
+      },
+      {
         "action": "sniff",
         "sniffer": [
           "http",
@@ -101,14 +98,7 @@
         ],
         "timeout": "500ms"
       },
-      {
-        "protocol": "dns",
-        "action": "hijack-dns"
-      },
-      {
-        "port": 53,
-        "action": "hijack-dns"
-      },
+
       {
         "package_name": [
           "com.cmbchina.ccd.pluto.cmbActivity",
