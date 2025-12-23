@@ -6,90 +6,90 @@
     "timestamp": true
   },
   "dns": {
-    "fakeip": {
-      "enabled": true,
-      "inet4_range": "198.18.0.0/15",
-      "inet6_range": "fc00::/18"
-    },
     "servers": [
       {
         "tag": "google",
-        "address": "https://8.8.8.8/dns-query",
+        "type": "https",
+        "server": "8.8.8.8",
+        "server_port": 443,
         "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "tag": "ali",
-        "address": "https://223.5.5.5/dns-query",
-        "detour": "direct"
+        "type": "udp",
+        "server": "223.5.5.5",
+        "server_port": 53
       },
       {
         "tag": "fakeip",
-        "address": "fakeip"
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15",
+        "inet6_range": "fc00::/18"
       }
     ],
     "rules": [
       {
-        "outbound": "any",
-        "action": "route",
-        "server": "ali",
-        "disable_cache": true
-      },
-      {
         "clash_mode": "Direct",
-        "action": "route",
         "server": "ali"
       },
       {
         "clash_mode": "Global",
-        "action": "route",
         "server": "fakeip"
       },
       {
-        "query_type": "HTTPS",
-        "action": "reject"
+        "rule_set": "cn_ip",
+        "action": "route",
+        "server": "ali"
+      },
+      {
+        "rule_set": "cn_domain",
+        "action": "route",
+        "server": "ali"
+      },
+      {
+        "rule_set": "proxy_domain",
+        "action": "route",
+        "server": "fakeip"
       },
       {
         "query_type": [
           "A",
           "AAAA"
         ],
-        "action": "route",
-        "server": "fakeip",
-        "rewrite_ttl": 1
+        "server": "fakeip"
       },
-      {
-        "rule_set": "cn_domain",
-        "action": "route",
-        "server": "ali"
-      }
     ],
     "final": "google",
+    "strategy": "prefer_ipv4",
     "independent_cache": true
   },
   "inbounds": [
     {
       "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
       "address": [
-        "172.19.0.0/30",
+        "172.19.0.1/30",
         "fdfe:dcba:9876::/126"
       ],
-      "stack": "mixed",
+      "mtu": 1500,
       "auto_route": true,
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 7890
-        }
-      }
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true
     },
     {
       "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 7890
+      "tag": "mixed-in",
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": true
     }
   ],
   "route": {
+    "final": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "ali",
     "rules": [
       {
         "action": "sniff",
@@ -102,22 +102,29 @@
         "timeout": "500ms"
       },
       {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "port": 53
-          },
-          {
-            "protocol": "dns"
-          }
-        ],
+        "protocol": "dns",
         "action": "hijack-dns"
       },
       {
+        "port": 53,
+        "action": "hijack-dns"
+      },
+      {
+        "package_name": [
+          "com.cmbchina.ccd.pluto.cmbActivity",
+          "com.eg.android.AlipayGphone",
+          "com.jingdong.app.mall",
+          "com.tencent.mobileqq",
+          "com.taobao.taobao",
+          "com.tencent.mm",
+          "com.unionpay",
+          "com.icbc"
+        ],
+        "action": "direct"
+      },
+      {
         "rule_set": "adblock",
-        "action": "route",
-        "outbound": "adblock"
+        "action": "reject"
       },
       {
         "ip_is_private": true,
@@ -171,7 +178,9 @@
       {
         "rule_set": [
           "cn_ip",
-          "cn_domain"
+          "cn_domain",
+          "private_ip",
+          "private_domain"
         ],
         "action": "route",
         "outbound": "direct"
@@ -179,8 +188,7 @@
       {
         "rule_set": [
           "apple_ip",
-          "apple_domain",
-          "bilibili_domain"
+          "apple_domain"
         ],
         "action": "route",
         "outbound": "direct"
@@ -204,7 +212,7 @@
         "outbound": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
       },
       {
-        "rule_set": "openai_domain",
+        "rule_set": "ai_domain",
         "action": "route",
         "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
       },
@@ -225,10 +233,10 @@
       },
       {
         "rule_set": [
-          "telegram_ip",
-          "telegram_domain",
           "google_ip",
-          "google_domain"
+          "google_domain",
+          "telegram_ip",
+          "telegram_domain"
         ],
         "action": "route",
         "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
@@ -285,13 +293,6 @@
         "download_detour": "direct"
       },
       {
-        "tag": "bilibili_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bilibili.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "cn_ip",
         "type": "remote",
         "format": "binary",
@@ -334,10 +335,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "openai_domain",
+        "tag": "ai_domain",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/ai.srs",
         "download_detour": "direct"
       },
       {
@@ -383,6 +384,20 @@
         "download_detour": "direct"
       },
       {
+        "tag": "private_ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/privateip.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "private_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/sing-box-ruleset/private.srs",
+        "download_detour": "DIRECT"
+      },
+      {
         "tag": "youtube_domain",
         "type": "remote",
         "format": "binary",
@@ -396,15 +411,9 @@
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
         "download_detour": "direct"
       }
-    ],
-    "final": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-    "auto_detect_interface": true
+    ]
   },
   "outbounds": [
-    {
-      "tag": "adblock",
-      "type": "block"
-    },
     {
       "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
       "type": "selector",
