@@ -18,7 +18,6 @@
         "type": "udp",
         "server": "114.114.114.114",
         "server_port": 53,
-        "detour": "direct"
       },
       {
         "tag": "fakeip",
