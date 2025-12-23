@@ -1,3 +1,4 @@
+
 {
   "log": {
     "disabled": false,
@@ -5,86 +6,90 @@
     "timestamp": true
   },
   "dns": {
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    },
     "servers": [
       {
-        "tag": "dns_local",
-        "type": "udp",
-        "server": "223.5.5.5",
-        "server_port": 53
-      },
-      {
-        "tag": "dns_remote",
-        "type": "https",
-        "server": "8.8.8.8",
-        "server_port": 443,
+        "tag": "google",
+        "address": "https://8.8.8.8/dns-query",
         "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
-        "tag": "dns_fakeip",
-        "type": "fakeip",
-        "inet4_range": "198.18.0.0/15"
+        "tag": "ali",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "direct"
+      },
+      {
+        "tag": "fakeip",
+        "address": "fakeip"
       }
     ],
     "rules": [
       {
-        "clash_mode": "direct",
-        "server": "dns_local"
+        "outbound": "any",
+        "action": "route",
+        "server": "ali",
+        "disable_cache": true
       },
       {
-        "clash_mode": "global",
-        "server": "dns_fakeip"
+        "clash_mode": "Direct",
+        "action": "route",
+        "server": "ali"
       },
       {
-        "rule_set": "cn_ip",
-        "server": "dns_local"
+        "clash_mode": "Global",
+        "action": "route",
+        "server": "fakeip"
       },
       {
-        "rule_set": "cn_domain",
-        "server": "dns_local"
-      },
-      {
-        "rule_set": "proxy_domain",
-        "server": "dns_fakeip"
+        "query_type": "HTTPS",
+        "action": "reject"
       },
       {
         "query_type": [
           "A",
           "AAAA"
         ],
-        "server": "dns_fakeip"
+        "action": "route",
+        "server": "fakeip",
+        "rewrite_ttl": 1
+      },
+      {
+        "rule_set": "cn_domain",
+        "action": "route",
+        "server": "ali"
       }
     ],
-    "final": "dns_local",
-    "strategy": "prefer_ipv4",
+    "final": "google",
     "independent_cache": true
   },
   "inbounds": [
     {
       "type": "tun",
-      "tag": "tun-in",
-      "interface_name": "tun0",
       "address": [
-        "172.19.0.1/30",
-        "fdfe:dcba:9876::0/126"
+        "172.19.0.0/30",
+        "fdfe:dcba:9876::/126"
       ],
-      "mtu": 1500,
+      "stack": "mixed",
       "auto_route": true,
-      "strict_route": true,
-      "stack": "system",
-      "sniff": true
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 7890
+        }
+      }
     },
     {
       "type": "mixed",
-      "tag": "mixed-in",
-      "listen": "0.0.0.0",
-      "listen_port": 2080,
-      "sniff": true
+      "listen": "127.0.0.1",
+      "listen_port": 7890
     }
   ],
   "route": {
-    "auto_detect_interface": true,
-    "final": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-    "default_domain_resolver": "dns_local",
     "rules": [
       {
         "action": "sniff",
@@ -94,40 +99,25 @@
           "quic",
           "dns"
         ],
-        "timeout": "300ms"
+        "timeout": "500ms"
       },
       {
-        "protocol": "dns",
-        "action": "hijack-dns"
-      },
-      {
-        "port": 53,
-        "action": "hijack-dns"
-      },
-      {
-        "package_name": [
-          "com.eg.android.AlipayGphone",
-          "com.tencent.mm",
-          "com.tencent.mobileqq",
-          "com.jingdong.app.mall",
-          "com.taobao.taobao",
-          "com.cmbchina.ccd.pluto.cmbActivity",
-          "com.unionpay",
-          "com.icbc"
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
         ],
-        "action": "direct"
-      },
-      {
-        "package_name": [
-          "org.telegram.messenger",
-          "com.instagram.android"
-        ],
-        "action": "route",
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
+        "action": "hijack-dns"
       },
       {
         "rule_set": "adblock",
-        "action": "reject"
+        "action": "route",
+        "outbound": "adblock"
       },
       {
         "ip_is_private": true,
@@ -145,19 +135,60 @@
         "outbound": "direct"
       },
       {
-        "domain_suffix": ["qmeng.top"],
+        "domain_suffix": [
+          "qmeng.top",
+          "googleapis.cn",
+          "xn--ngstr-lra8j.com"
+        ],
         "action": "route",
         "outbound": "direct"
       },
       {
-        "domain": ["cdn.lilyemby.my"],
+        "domain": [
+          "cdn.lilyemby.my"
+        ],
         "action": "route",
         "outbound": "direct"
       },
       {
-        "rule_set": "bilibili_domain",
+        "domain_suffix": [
+          "v50.su",
+          "zox.show",
+          "69yun69.com"
+        ],
+        "action": "route",
+        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
+      },
+      {
+        "domain": [
+          "tv.ash.yt",
+          "ask.ash.yt",
+          "emby.oceancloud.asia"
+        ],
+        "action": "route",
+        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
+      },      
+      {
+        "rule_set": [
+          "cn_ip",
+          "cn_domain"
+        ],
         "action": "route",
         "outbound": "direct"
+      },
+      {
+        "rule_set": [
+          "apple_ip",
+          "apple_domain",
+          "bilibili_domain"
+        ],
+        "action": "route",
+        "outbound": "direct"
+      },
+      {
+        "rule_set": "tiktok_domain",
+        "action": "route",
+        "outbound": "🎧𝕋𝕚𝕜𝕥𝕠𝕜"
       },
       {
         "rule_set": [
@@ -165,12 +196,7 @@
           "netflix_domain"
         ],
         "action": "route",
-        "outbound": "🎬𝔼𝕞𝕓𝕪"
-      },
-      {
-        "rule_set": "bahamut_domain",
-        "action": "route",
-        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
+        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
       },
       {
         "rule_set": "youtube_domain",
@@ -181,6 +207,31 @@
         "rule_set": "openai_domain",
         "action": "route",
         "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
+      },
+      {
+        "rule_set": "spotify_domain",
+        "action": "route",
+        "outbound": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪"
+      },
+      {
+        "rule_set": "duolingo_domain",
+        "action": "route",
+        "outbound": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠"
+      },
+      {
+        "rule_set": "twitter_domain",
+        "action": "route",
+        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
+      },
+      {
+        "rule_set": [
+          "telegram_ip",
+          "telegram_domain",
+          "google_ip",
+          "google_domain"
+        ],
+        "action": "route",
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "type": "logical",
@@ -196,7 +247,11 @@
               "apple_domain",
               "google_domain",
               "telegram_domain",
-              "netflix_domain"
+              "netflix_domain",
+              "tiktok_domain",
+              "spotify_domain",
+              "twitter_domain",
+              "duolingo_domain"
             ]
           }
         ],
@@ -205,38 +260,6 @@
       },
       {
         "action": "resolve"
-      },
-      {
-        "rule_set": [
-          "telegram_ip",
-          "telegram_domain"
-        ],
-        "action": "route",
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
-      },
-      {
-        "rule_set": [
-          "google_ip",
-          "google_domain"
-        ],
-        "action": "route",
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
-      },
-      {
-        "rule_set": [
-          "apple_ip",
-          "apple_domain"
-        ],
-        "action": "route",
-        "outbound": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠"
-      },
-      {
-        "rule_set": [
-          "cn_ip",
-          "cn_domain"
-        ],
-        "action": "route",
-        "outbound": "direct"
       }
     ],
     "rule_set": [
@@ -259,13 +282,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "bahamut_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/bahamut.srs",
         "download_detour": "direct"
       },
       {
@@ -332,6 +348,13 @@
         "download_detour": "direct"
       },
       {
+        "tag": "spotify_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
+        "download_detour": "direct"
+      },
+      {
         "tag": "telegram_ip",
         "type": "remote",
         "format": "binary",
@@ -346,10 +369,31 @@
         "download_detour": "direct"
       },
       {
+        "tag": "tiktok_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/tiktok.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "twitter_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/twitter.srs",
+        "download_detour": "direct"
+      },
+      {
         "tag": "youtube_domain",
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/youtube.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "duolingo_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
         "download_detour": "direct"
       }
     ],
@@ -358,7 +402,11 @@
   },
   "outbounds": [
     {
-      "tag": "🎬𝔼𝕞𝕓𝕪",
+      "tag": "adblock",
+      "type": "block"
+    },
+    {
+      "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
       "type": "selector",
       "outbounds": []
     },
@@ -369,11 +417,6 @@
     },
     {
       "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "☁️ℙ𝕚𝕜ℙ𝕒𝕜",
       "type": "selector",
       "outbounds": []
     },
@@ -405,17 +448,15 @@
     },
     {
       "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-      "type": "urltest",
-      "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
+      "type": "selector",
+      "outbounds": []
     },
     {
       "tag": "direct",
       "type": "direct"
     }
   ],
+
   "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
