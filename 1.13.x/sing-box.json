@@ -358,10 +358,6 @@
   },
   "outbounds": [
     {
-      "tag": "adblock",
-      "type": "block"
-    },
-    {
       "tag": "🎬𝔼𝕞𝕓𝕪",
       "type": "selector",
       "outbounds": []
