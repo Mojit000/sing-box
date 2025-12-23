@@ -1,0 +1,540 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns_local",
+        "type": "udp",
+        "server": "223.5.5.5",
+        "server_port": 53
+      },
+      {
+        "tag": "dns_remote",
+        "type": "https",
+        "server": "8.8.8.8",
+        "server_port": 443,
+        "detour": "🚀 节点选择"
+      },
+      {
+        "tag": "dns_fakeip",
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15"
+      }
+    ],
+    "rules": [
+      {
+        "clash_mode": "direct",
+        "server": "dns_local"
+      },
+      {
+        "clash_mode": "global",
+        "server": "dns_fakeip"
+      },
+      {
+        "rule_set": "cn",
+        "server": "dns_local"
+      },
+      {
+        "rule_set": "cnip",
+        "server": "dns_local"
+      },
+      {
+        "rule_set": "proxy",
+        "server": "dns_fakeip"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "dns_fakeip"
+      }
+    ],
+    "final": "dns_local",
+    "strategy": "prefer_ipv4",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "address": [
+        "172.19.0.1/30"
+      ],
+      "mtu": 1500,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": true
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "🚀 节点选择",
+      "type": "selector",
+      "outbounds": [
+        "⚡ 自动优选",
+        "节点1-us1",
+        "节点2-us2",
+        "DIRECT"
+      ],
+      "default": "⚡ 自动优选"
+    },
+    {
+      "tag": "⚡ 自动优选",
+      "type": "urltest",
+      "outbounds": [
+        "节点1-us1",
+        "节点2-us2"
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "3m",
+      "tolerance": 50
+    },
+    {
+      "tag": "📹 油管视频",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "🎵 TikTok",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "📺 哔哩哔哩",
+      "type": "selector",
+      "outbounds": [
+        "DIRECT",
+        "🚀 节点选择"
+      ],
+      "default": "DIRECT"
+    },
+    {
+      "tag": "🇬 谷歌服务",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "📲 电报消息",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "🤖 人工智能",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "🪟 微软服务",
+      "type": "selector",
+      "outbounds": [
+        "DIRECT",
+        "🚀 节点选择"
+      ],
+      "default": "DIRECT"
+    },
+    {
+      "tag": "🍎 苹果服务",
+      "type": "selector",
+      "outbounds": [
+        "DIRECT",
+        "🚀 节点选择"
+      ],
+      "default": "DIRECT"
+    },
+    {
+      "tag": "🎮 游戏服务",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择",
+        "DIRECT"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "🐟 漏网之鱼",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择",
+        "DIRECT"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "tag": "🇨🇳 直连",
+      "type": "selector",
+      "outbounds": [
+        "DIRECT",
+        "🚀 节点选择"
+      ],
+      "default": "DIRECT"
+    },
+    {
+      "tag": "GLOBAL",
+      "type": "selector",
+      "outbounds": [
+        "🚀 节点选择",
+        "DIRECT"
+      ],
+      "default": "🚀 节点选择"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "节点1-us1",
+      "server": "域名",
+      "server_port": 端口,
+      "password": "密码",
+      "up_mbps": 25,
+      "down_mbps": 25,
+      "obfs": {
+        "type": "salamander",
+        "password": "混淆密码"
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "域名",
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "节点2-us2",
+      "server": "域名",
+      "server_port": 端口,
+      "password": "密码",
+      "up_mbps": 25,
+      "down_mbps": 25,
+      "obfs": {
+        "type": "salamander",
+        "password": "混淆密码"
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "域名",
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "DIRECT",
+      "type": "direct"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "final": "🐟 漏网之鱼",
+    "default_domain_resolver": "dns_local",
+    "rules": [
+      {
+        "action": "sniff",
+        "sniffer": [
+          "http",
+          "tls",
+          "quic",
+          "dns"
+        ],
+        "timeout": "300ms"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "port": 53,
+        "action": "hijack-dns"
+      },
+      {
+        "package_name": [
+          "com.eg.android.AlipayGphone",
+          "com.tencent.mm",
+          "com.tencent.mobileqq",
+          "com.jingdong.app.mall",
+          "com.taobao.taobao",
+          "com.cmbchina.ccd.pluto.cmbActivity",
+          "com.unionpay",
+          "com.icbc"
+        ],
+        "action": "direct"
+      },
+      {
+        "package_name": [
+          "com.google.android.youtube",
+          "com.netflix.mediaclient",
+          "org.telegram.messenger",
+          "com.twitter.android",
+          "com.instagram.android"
+        ],
+        "action": "route",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "ads",
+        "action": "reject"
+      },
+      {
+        "rule_set": "telegramip",
+        "action": "route",
+        "outbound": "📲 电报消息"
+      },
+      {
+        "rule_set": [
+          "privateip",
+          "private"
+        ],
+        "action": "direct"
+      },
+      {
+        "rule_set": "cnip",
+        "action": "route",
+        "outbound": "🇨🇳 直连"
+      },
+      {
+        "rule_set": "cn",
+        "action": "route",
+        "outbound": "🇨🇳 直连"
+      },
+      {
+        "rule_set": "ai",
+        "action": "route",
+        "outbound": "🤖 人工智能"
+      },
+      {
+        "rule_set": "microsoft-cn",
+        "action": "route",
+        "outbound": "🪟 微软服务"
+      },
+      {
+        "rule_set": "apple-cn",
+        "action": "route",
+        "outbound": "🍎 苹果服务"
+      },
+      {
+        "rule_set": [
+          "google-cn",
+          "google"
+        ],
+        "action": "route",
+        "outbound": "🇬 谷歌服务"
+      },
+      {
+        "rule_set": "games-cn",
+        "action": "route",
+        "outbound": "🎮 游戏服务"
+      },
+      {
+        "rule_set": "bilibili",
+        "action": "route",
+        "outbound": "📺 哔哩哔哩"
+      },
+      {
+        "rule_set": "youtube",
+        "action": "route",
+        "outbound": "📹 油管视频"
+      },
+      {
+        "rule_set": "tiktok",
+        "action": "route",
+        "outbound": "🎵 TikTok"
+      },
+      {
+        "rule_set": [
+          "proxy_media",
+          "proxy",
+          "tld-proxy"
+        ],
+        "action": "route",
+        "outbound": "🚀 节点选择"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "proxy_media",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/media.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "ads",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/ads.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "applications",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/applications.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "private",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/private.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "microsoft-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/microsoft-cn.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "apple-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/apple-cn.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "google-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/google-cn.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "games-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/games-cn.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/youtube.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "tiktok",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/tiktok.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "bilibili",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/bilibili.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "ai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/ai.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "networktest",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/networktest.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "proxy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/proxy.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/cn.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "telegramip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/telegramip.srs",
+        "download_detour": "🚀 节点选择"
+      },
+      {
+        "tag": "privateip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/privateip.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "cnip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/cnip.srs",
+        "download_detour": "DIRECT"
+      },
+      {
+        "tag": "tld-proxy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/tld-proxy.srs",
+        "download_detour": "🚀 节点选择"
+      }
+    ]
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "./cache.db",
+      "store_fakeip": true,
+      "store_rdrc": true,
+      "rdrc_timeout": "24h0m0s"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "./webui",
+      "secret": "",
+      "default_mode": "rule"
+    }
+  }
+}
