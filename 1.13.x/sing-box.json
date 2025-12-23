@@ -461,7 +461,7 @@
       "outbounds": []
     },
     {
-      "tag": "direct",
+      "tag": "DIRECT",
       "type": "direct"
     }
   ],
