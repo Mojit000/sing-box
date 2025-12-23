@@ -113,7 +113,10 @@
         "action": "direct"
       },
       {
-        "rule_set": "adblock",
+        "rule_set": [
+          "anti-ad",
+          "geosite-category-ads-all"
+        ],
         "action": "reject"
       },
       {
@@ -262,10 +265,17 @@
     ],
     "rule_set": [
       {
-        "tag": "adblock",
+        "tag": "anti-ad",
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/anti-ad-sing-box.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-category-ads-all",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
         "download_detour": "direct"
       },
       {
