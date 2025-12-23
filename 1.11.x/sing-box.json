@@ -203,7 +203,7 @@
         "outbound": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
       },
       {
-        "rule_set": "openai_domain",
+        "rule_set": "ai_domain",
         "action": "route",
         "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
       },
@@ -333,10 +333,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "openai_domain",
+        "tag": "ai_domain",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/sing-box-ruleset/ai.srs",
         "download_detour": "direct"
       },
       {
