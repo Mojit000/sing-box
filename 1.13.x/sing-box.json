@@ -11,12 +11,13 @@
         "tag": "google",
         "type": "https",
         "server": "8.8.8.8",
+        "server_port": 443,
         "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "tag": "ali",
         "type": "udp",
-        "server": "114.114.114.114",
+        "server": "223.5.5.5",
         "server_port": 53
       },
       {
@@ -28,23 +29,38 @@
     ],
     "rules": [
       {
+        "rule_set": "anti-ad",
+        "action": "reject",
+        "method": "default"
+      },
+      {
         "clash_mode": "Direct",
         "server": "ali"
       },
       {
+        "clash_mode": "Global",
+        "server": "fakeip"
+      },
+      {
         "rule_set": "cn_ip",
+        "action": "route",
         "server": "ali"
       },
       {
         "rule_set": "cn_domain",
+        "action": "route",
         "server": "ali"
       },
       {
         "rule_set": "proxy_domain",
+        "action": "route",
         "server": "fakeip"
       },
       {
-        "clash_mode": "Global",
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
         "server": "fakeip"
       }
     ],
@@ -61,7 +77,7 @@
         "172.19.0.1/30",
         "fdfe:dcba:9876::/126"
       ],
-      "mtu": 1480,
+      "mtu": 1500,
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
@@ -81,14 +97,6 @@
     "default_domain_resolver": "ali",
     "rules": [
       {
-        "protocol": "dns",
-        "action": "hijack-dns"
-      },
-      {
-        "port": 53,
-        "action": "hijack-dns"
-      },
-      {
         "action": "sniff",
         "sniffer": [
           "http",
@@ -98,7 +106,14 @@
         ],
         "timeout": "500ms"
       },
-
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "port": 53,
+        "action": "hijack-dns"
+      },
       {
         "package_name": [
           "com.cmbchina.ccd.pluto.cmbActivity",
@@ -113,11 +128,9 @@
         "action": "direct"
       },
       {
-        "rule_set": [
-          "anti-ad",
-          "geosite-category-ads-all"
-        ],
-        "action": "reject"
+        "rule_set": "anti-ad",
+        "action": "reject",
+        "method": "drop"
       },
       {
         "ip_is_private": true,
@@ -269,13 +282,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/anti-ad-sing-box.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-category-ads-all",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
         "download_detour": "direct"
       },
       {
