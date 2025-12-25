@@ -117,15 +117,27 @@
       {
         "package_name": [
           "com.cmbchina.ccd.pluto.cmbActivity",
+          "com.alibaba.android.rimet.cgntalk",
           "com.eg.android.AlipayGphone",
+          "org.localsend.localsend_app",
           "com.jingdong.app.mall",
           "com.tencent.mobileqq",
+          "com.sspai.sspaiandroid",
+          "com.alibaba.wireless",
           "com.taobao.taobao",
+          "com.yyw.wangpan",
+          "com.hengye.share",
+          "com.xingin.xhs",
           "com.tencent.mm",
           "com.unionpay",
           "com.icbc"
         ],
         "action": "direct"
+      },
+      {
+        "domain_keyword": "coolapk",
+        "action": "route",
+        "outbound": "direct"
       },
       {
         "rule_set": "anti-ad",
