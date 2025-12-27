@@ -197,6 +197,8 @@
         "rule_set": [
           "cn_ip",
           "cn_domain",
+          "geoip-cn",
+          "geosite-cn",
           "private_ip",
           "private_domain"
         ],
@@ -428,6 +430,27 @@
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
         "download_detour": "direct"
+      },
+      {
+        "tag": "geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "Direct"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geoip/cn.srs",
+        "download_detour": "Direct"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/cn.srs",
+        "download_detour": "Direct"
       }
     ]
   },
