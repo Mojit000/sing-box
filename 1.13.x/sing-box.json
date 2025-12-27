@@ -43,17 +43,14 @@
       },
       {
         "rule_set": "cn_ip",
-        "action": "route",
         "server": "ali"
       },
       {
         "rule_set": "cn_domain",
-        "action": "route",
         "server": "ali"
       },
       {
         "rule_set": "proxy_domain",
-        "action": "route",
         "server": "fakeip"
       },
       {
