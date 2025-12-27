@@ -31,7 +31,7 @@
       {
         "rule_set": "anti-ad",
         "action": "reject",
-        "method": "default"
+        "method": "drop"
       },
       {"query_type": "HTTPS",
         "action": "reject"
