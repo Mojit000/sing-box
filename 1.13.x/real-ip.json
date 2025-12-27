@@ -17,8 +17,7 @@
         "tag": "ali",
         "type": "udp",
         "server": "223.5.5.5",
-        "server_port": 53,
-        "detour": "Direct"
+        "server_port": 53
       },
       {
         "tag": "fakeip",
