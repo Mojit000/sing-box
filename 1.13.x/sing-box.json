@@ -33,6 +33,9 @@
         "action": "reject",
         "method": "default"
       },
+      {"query_type": "HTTPS",
+        "action": "reject"
+      },
       {
         "clash_mode": "Direct",
         "server": "ali"
