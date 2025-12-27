@@ -39,7 +39,7 @@
       },
       {
         "clash_mode": "Global",
-        "server": "fakeip"
+        "server": "google"
       },
       {
         "rule_set": "cn_ip",
@@ -54,7 +54,7 @@
       {
         "rule_set": "proxy_domain",
         "action": "route",
-        "server": "fakeip"
+        "server": "google"
       },
       {
         "query_type": [
