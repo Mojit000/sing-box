@@ -44,9 +44,9 @@
       {
         "rule_set": [
           "cn_ip",
-          "cn_domain"
+          "cn_domain",
+          "rule_set": "geosite-cn"
         ],
-        "action": "route",
         "server": "ali"
       },
       {
@@ -66,7 +66,6 @@
       },
       {
         "rule_set": "proxy_domain",
-        "action": "route",
         "server": "google"
       },
       {
@@ -218,6 +217,13 @@
           "private_domain"
         ],
         "action": "direct"
+      },
+      {
+        "rule_set": [
+          "geosite-cn",
+          "geoip-cn"
+        ],
+        "outbound": "direct"
       },
       {
         "rule_set": [
@@ -444,6 +450,13 @@
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
         "download_detour": "direct"
+      },
+      {
+        "tag": "geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "proxy"
       },
       {
         "tag": "geoip-cn",
