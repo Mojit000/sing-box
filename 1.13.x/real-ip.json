@@ -19,7 +19,7 @@
         "type": "udp",
         "server": "223.5.5.5",
         "server_port": 53,
-        "detour": "Direct"
+        "detour": "direct"
       },
       {
         "tag": "fakeip",
@@ -145,8 +145,7 @@
       },
       {
         "domain_keyword": "coolapk",
-        "action": "route",
-        "outbound": "direct"
+        "action": "direct"
       },
       {
         "rule_set": "anti-ad",
@@ -155,8 +154,7 @@
       },
       {
         "ip_is_private": true,
-        "action": "route",
-        "outbound": "direct"
+        "action": "direct"
       },
       {
         "clash_mode": "Global",
@@ -174,15 +172,13 @@
           "googleapis.cn",
           "xn--ngstr-lra8j.com"
         ],
-        "action": "route",
-        "outbound": "direct"
+        "action": "direct"
       },
       {
         "domain": [
           "cdn.lilyemby.my"
         ],
-        "action": "route",
-        "outbound": "direct"
+        "action": "direct"
       },
       {
         "domain_suffix": [
@@ -209,8 +205,7 @@
           "private_ip",
           "private_domain"
         ],
-        "action": "route",
-        "outbound": "direct"
+        "action": "direct"
       },
       {
         "rule_set": [
