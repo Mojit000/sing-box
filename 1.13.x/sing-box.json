@@ -281,12 +281,13 @@
               "geosite-cn",
               "apple_domain",
               "google_domain",
-              "telegram_domain",
-              "netflix_domain",
               "tiktok_domain",
               "spotify_domain",
+              "youtube_domain",
+              "netflix_domain",
               "twitter_domain",
-              "duolingo_domain"
+              "duolingo_domain",
+              "telegram_domain"
             ]
           }
         ],
