@@ -49,7 +49,7 @@
         "rule_set": [
           "cn_ip",
           "cn_domain",
-          "rule_set": "geosite-cn"
+          "geosite-cn"
         ],
         "server": "ali"
       },
