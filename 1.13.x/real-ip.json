@@ -33,10 +33,6 @@
         "method": "drop"
       },
       {
-        "query_type": "HTTPS",
-        "action": "reject"
-      },
-      {
         "clash_mode": "Direct",
         "server": "ali"
       },
