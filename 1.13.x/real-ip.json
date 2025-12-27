@@ -11,7 +11,6 @@
         "tag": "google",
         "type": "https",
         "server": "8.8.8.8",
-        "client_subnet": "114.114.114.114",
         "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
@@ -51,6 +50,21 @@
         "rule_set": "cn_domain",
         "action": "route",
         "server": "ali"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geolocation-!cn",
+            "invert": true
+          },
+          {
+            "rule_set": "geoip-cn"
+          }
+        ],
+        "server": "google",
+        "client_subnet": "114.114.114.114/24"
       },
       {
         "rule_set": "proxy_domain",
@@ -431,6 +445,20 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geoip/cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/cn.srs",
         "download_detour": "direct"
       }
     ]
