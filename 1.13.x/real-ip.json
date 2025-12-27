@@ -42,12 +42,10 @@
         "server": "google"
       },
       {
-        "rule_set": "cn_ip",
-        "action": "route",
-        "server": "ali"
-      },
-      {
-        "rule_set": "cn_domain",
+        "rule_set": [
+          "cn_ip",
+          "cn_domain"
+        ],
         "action": "route",
         "server": "ali"
       },
