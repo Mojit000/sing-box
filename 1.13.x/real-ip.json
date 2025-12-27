@@ -11,6 +11,7 @@
         "tag": "google",
         "type": "https",
         "server": "8.8.8.8",
+        "client_subnet": "114.114.114.114",
         "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
