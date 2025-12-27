@@ -33,7 +33,8 @@
         "action": "reject",
         "method": "drop"
       },
-      {"query_type": "HTTPS",
+      {
+        "query_type": "HTTPS",
         "action": "reject"
       },
       {
