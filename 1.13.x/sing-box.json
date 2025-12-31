@@ -437,7 +437,7 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/cn.srs",
-        "download_detour": "Direct"
+        "download_detour": "direct"
       }
     ]
   },
