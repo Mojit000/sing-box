@@ -68,7 +68,8 @@
           "A",
           "AAAA"
         ],
-        "server": "fakeip"
+        "server": "fakeip",
+        "rewrite_ttl": 1
       }
     ],
     "final": "google",
