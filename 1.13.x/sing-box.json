@@ -37,6 +37,12 @@
         "action": "reject"
       },
       {
+        "outbound": "any",
+        "action": "route",
+        "server": "ali",
+        "disable_cache": true
+      },
+      {
         "clash_mode": "Direct",
         "server": "ali"
       },
@@ -65,7 +71,7 @@
         "server": "fakeip"
       }
     ],
-    "final": "ali",
+    "final": "google",
     "strategy": "prefer_ipv4",
     "independent_cache": true
   },
