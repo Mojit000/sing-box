@@ -37,6 +37,14 @@
         "action": "reject"
       },
       {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "fakeip",
+        "rewrite_ttl": 5
+      },
+      {
         "outbound": "any",
         "action": "route",
         "server": "ali",
@@ -44,10 +52,12 @@
       },
       {
         "clash_mode": "Direct",
+        "action": "route",
         "server": "ali"
       },
       {
         "clash_mode": "Global",
+        "action": "route",
         "server": "fakeip"
       },
       {
@@ -62,17 +72,9 @@
       {
         "rule_set": "proxy_domain",
         "server": "fakeip"
-      },
-      {
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
-        "server": "fakeip",
-        "rewrite_ttl": 1
       }
     ],
-    "final": "google",
+    "final": "ali",
     "strategy": "prefer_ipv4",
     "independent_cache": true
   },
@@ -147,17 +149,13 @@
           "com.unionpay",
           "com.icbc"
         ],
-        "action": "direct"
+        "action": "route",
+        "outbound": "direct"
       },
       {
         "domain_keyword": "coolapk",
         "action": "route",
         "outbound": "direct"
-      },
-      {
-        "rule_set": "anti-ad",
-        "action": "reject",
-        "method": "drop"
       },
       {
         "ip_is_private": true,
@@ -437,7 +435,7 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geoip/cn.srs",
-        "download_detour": "Direct"
+        "download_detour": "direct"
       },
       {
         "tag": "geosite-cn",
@@ -505,7 +503,8 @@
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
       "external_ui_download_url": "https://ghfast.top/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "direct"
+      "external_ui_download_detour": "direct",
+      "default_mode": "rule"
     },
     "cache_file": {
       "enabled": true,
