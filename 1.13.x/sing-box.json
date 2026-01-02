@@ -67,11 +67,18 @@
           "private_ip",
           "private_domain"
         ],
+        "action": "route",
         "server": "ali"
       },
       {
-        "rule_set": "proxy_domain",
-        "server": "fakeip"
+        "rule_set": [
+          "google_ip",
+          "google_domain",
+          "youtube_domain",
+          "proxy_domain"
+        ],
+        "action": "route",
+        "server": "google"
       }
     ],
     "final": "ali",
