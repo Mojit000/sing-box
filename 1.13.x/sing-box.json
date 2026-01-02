@@ -65,7 +65,7 @@
         "server": "fakeip"
       }
     ],
-    "final": "google",
+    "final": "ali",
     "strategy": "prefer_ipv4",
     "independent_cache": true
   },
