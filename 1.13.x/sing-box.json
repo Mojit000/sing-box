@@ -73,6 +73,8 @@
         "rule_set": [
           "google_ip",
           "google_domain",
+          "telegram_ip",
+          "telegram_domain",
           "youtube_domain",
           "proxy_domain"
         ],
