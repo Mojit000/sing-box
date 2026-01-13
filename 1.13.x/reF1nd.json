@@ -527,28 +527,31 @@
       "type": "selector",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "^(?!.*(?:✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯)).*(?:新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$"
+      "exclude": "✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯",
+      "include": "新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建"
     },
     {
       "tag": "🎧𝕋𝕚𝕜𝕥𝕠𝕜",
       "type": "selector",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "^(?!.*(?:✰✰|★★|日本|JP|🇯🇵|微斯)).*(?:台湾|TW|🇹🇼|🇨🇳|自建).*$"
+      "exclude": "✰✰|★★|日本|JP|🇯🇵|微斯",
+      "include": "台湾|TW|🇹🇼|🇨🇳|自建"
     },
     {
       "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
       "type": "selector",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "^(?!.*(?:微斯)).*(?:美国|US|🇺🇸新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$"
+      "exclude": "微斯",
+      "include": "美国|US|🇺🇸新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建"
     },
     {
       "tag": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪",
       "type": "urltest",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "(?:新加坡|SG|🇸🇬).*$",
+      "include": "新加坡|SG|🇸🇬",
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
@@ -558,21 +561,22 @@
       "type": "selector",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "^(?!.*(?:✰✰|★★)).*(?:美国|US|🇺🇸|自建).*$"
+      "exclude": "✰✰|★★|微斯",
+      "include": "美国|US|🇺🇸|自建"
     },
     {
       "tag": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖",
       "type": "selector",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "^((?!✰✰|★★|微斯).)*$"
+      "exclude": "✰✰|★★|微斯"
     },
     {
       "tag": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠",
       "type": "urltest",
       "outbounds": [],
       "use_all_providers": true,
-      "include": "(?:新加坡|SG|🇸🇬).*$",
+      "include": "新加坡|SG|🇸🇬",
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
