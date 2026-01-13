@@ -542,7 +542,7 @@
     {
       "tag": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠",
       "type": "urltest",
-      "outbounds": ],
+      "outbounds": [],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
       "tolerance": 50
