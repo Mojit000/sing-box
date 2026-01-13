@@ -34,7 +34,7 @@
         "type": "https",
         "server": "cloudflare-dns.com",
         "domain_resolver": "hosts",
-        "detour": "proxy"
+        "detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "tag": "local",
@@ -584,11 +584,8 @@
     {
       "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
       "type": "selector",
-      "outbounds": [
-        "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
-      ],
-      "use_all_providers": true,
-      "exclude": "(?i)回家|剩余|到期"
+      "outbounds": [],
+      "use_all_providers": true
     },
     {
       "tag": "direct",
