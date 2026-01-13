@@ -1,7 +1,7 @@
 {
   "providers": [
     {
-      "tag": "reF1nd",
+      "tag": "",
       "type": "remote",
       "url": "ttps://ghfast.top/https://gist.githubusercontent.com/Mojit000/1b86dc74a8ea77d0001823e78831a43f/raw/reF1nd",
       "user_agent": "sing-box/v1.12.0",
