@@ -1,7 +1,6 @@
 {
   "dns": {
-    "servers": [
-      {
+    "servers": [{
         "tag": "default_dns",
         "type": "https",
         "server": "doh.pub",
@@ -11,7 +10,8 @@
         "tag": "direct_dns",
         "type": "https",
         "server": "dns.alidns.com",
-        "domain_resolver": "hosts"
+        "domain_resolver": "hosts",
+        "detour": "direct"
       },
       {
         "tag": "proxy_dns",
@@ -28,7 +28,7 @@
         "tag": "fake_ip",
         "type": "fakeip",
         "inet4_range": "198.18.0.0/15",
-        "inet6_range": "fc00::/64"
+        "inet6_range": "fc00::/18"
       },
       {
         "tag": "hosts",
@@ -39,7 +39,7 @@
             "223.6.6.6"
           ],
           "doh.pub": [
-            "1.12.12.21",
+            "1.12.12.12",
             "120.53.53.53"
           ],
           "dns.google": [
@@ -47,18 +47,16 @@
             "8.8.4.4"
           ],
           "cloudflare-dns.com": [
-            "104.16.248.249",
-            "104.16.249.249"
+            "1.1.1.1",
+            "1.0.0.1"
           ]
         }
       }
     ],
-    "rules": [
-      {
+    "rules": [{
         "rule_set": "anti-ad",
-        "action": "reject",
-        "method": "drop"
-      },      
+        "action": "reject"
+      },
       {
         "clash_mode": "Global",
         "query_type": [
@@ -66,7 +64,7 @@
           "AAAA"
         ],
         "server": "fake_ip",
-        "rewrite_ttl": 0
+        "rewrite_ttl": 300
       },
       {
         "clash_mode": "Global",
@@ -74,13 +72,6 @@
       },
       {
         "clash_mode": "Direct",
-        "server": "direct_dns"
-      },
-      {
-        "domain_suffix": [
-          "market.xiaomi.com",
-          "lancache.steamcontent.com"
-        ],
         "server": "direct_dns"
       },
       {
@@ -92,6 +83,12 @@
         "rcode": "NOTIMP"
       },
       {
+        "domain_suffix": [
+          ".arpa"
+        ],
+        "server": "local"
+      },
+      {
         "query_type": [
           "A",
           "AAAA"
@@ -100,13 +97,13 @@
         "rewrite_ttl": 0
       },
       {
-        "domain_suffix": [
-          ".arpa"
+        "rule_set": [
+          "ai_domain",
+          "proxy_domain",
+          "google_domain",
+          "telegram_ip",
+          "telegram_domain"
         ],
-        "server": "local"
-      },
-      {
-        "rule_set": "proxy_domain",
         "server": "proxy_dns"
       }
     ],
@@ -116,16 +113,20 @@
     "cache_capacity": 4096
   },
   "route": {
-    "rules": [
-      {
-        "domain_suffix": [
-          "push.apple.com"
+    "rules": [{
+        "type": "logical",
+        "mode": "and",
+        "rules": [{
+            "ip_version": 6
+          },
+          {
+            "default_interface_address": [
+              "2000::/3"
+            ],
+            "invert": true
+          }
         ],
-        "rule_set": [
-          "telegram_ip"
-        ],
-        "invert": true,
-        "action": "sniff"
+        "action": "reject"
       },
       {
         "protocol": "dns",
@@ -142,12 +143,12 @@
         "package_name": [
           "com.cmbchina.ccd.pluto.cmbActivity",
           "com.alibaba.android.rimet.cgntalk",
+          "com.tencent.soter.soterserver",
           "com.eg.android.AlipayGphone",
           "org.localsend.localsend_app",
+          "com.sspai.sspaiandroid",
           "com.jingdong.app.mall",
           "com.tencent.mobileqq",
-          "com.sspai.sspaiandroid",
-          "com.tencent.soter.soterserver",
           "com.alibaba.wireless",
           "com.taobao.taobao",
           "com.yyw.wangpan",
@@ -157,12 +158,6 @@
           "com.unionpay",
           "com.icbc"
         ],
-        "action": "route",
-        "outbound": "direct"
-      },
-      {
-        "domain_keyword": "coolapk",
-        "action": "route",
         "outbound": "direct"
       },
       {
@@ -174,19 +169,18 @@
         "outbound": "direct"
       },
       {
+        "domain_keyword": [
+          "coolapk"
+        ],
         "domain_suffix": [
           "qmeng.top",
+          "qmeng.xyz",
           "googleapis.cn",
           "xn--ngstr-lra8j.com"
         ],
-        "action": "route",
-        "outbound": "direct"
-      },
-      {
         "domain": [
           "cdn.lilyemby.my"
         ],
-        "action": "route",
         "outbound": "direct"
       },
       {
@@ -195,57 +189,18 @@
           "zox.show",
           "69yun69.com"
         ],
-        "action": "route",
-        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
-      },
-      {
         "domain": [
           "tv.ash.yt",
           "ask.ash.yt",
           "emby.oceancloud.asia"
         ],
-        "action": "route",
         "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
-      },      
+      },
       {
         "domain_suffix": [
-          "steamserver.net"
-        ],
-        "outbound": "direct"
-      },
-      {
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-        "ip_cidr": [
-          "91.108.16.0/21",
-          "91.108.56.0/23",
-          "149.154.168.0/22",
-          "2001:b28:f23c::/48",
-          "2001:b28:f23f::/48"
-        ]
-      },
-      {
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-        "ip_cidr": [
-          "91.108.12.0/22",
-          "149.154.172.0/22",
-          "2001:b28:f23d::/48"
-        ]
-      },
-      {
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
-        "ip_cidr": [
-          "5.28.192.0/18",
-          "91.105.192.0/23",
-          "91.108.4.0/22",
-          "91.108.8.0/22",
-          "91.108.56.0/22",
-          "95.161.64.0/20",
-          "109.239.140.0/24",
-          "149.154.160.0/21",
-          "185.76.151.0/24",
-          "2001:67c:4e8::/48",
-          "2a0a:f280:203::/48"
-        ]
+          "mypikpak.com"
+          ],
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "network": "icmp",
@@ -261,76 +216,48 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "apple_domain",
-        "outbound": "direct"
-      },
-      {
         "rule_set": [
           "geosite-cn",
+          "apple_domain",
           "private_domain"
         ],
-        "action": "route",
         "outbound": "direct"
       },
       {
         "rule_set": "tiktok_domain",
-        "action": "route",
         "outbound": "🎧𝕋𝕚𝕜𝕥𝕠𝕜"
-      },
-      {
-        "rule_set": "netflix_domain",
-        "action": "route",
-        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
-      },
-      {
-        "rule_set": "youtube_domain",
-        "action": "route",
-        "outbound": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
-      },
-      {
-        "rule_set": "ai_domain",
-        "action": "route",
-        "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
-      },
-      {
-        "rule_set": "spotify_domain",
-        "action": "route",
-        "outbound": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪"
-      },
-      {
-        "rule_set": "duolingo_domain",
-        "action": "route",
-        "outbound": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠"
-      },
-      {
-        "rule_set": "twitter_domain",
-        "action": "route",
-        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
       },
       {
         "type": "logical",
         "mode": "and",
-        "rules": [
-          {
-            "rule_set": "proxy_domain"
+        "rules": [{
+            "rule_set": "youtube_domain"
           },
           {
-            "invert": true,
-            "rule_set": [
-              "geosite-cn",
-              "apple_domain",
-              "google_domain",
-              "tiktok_domain",
-              "spotify_domain",
-              "youtube_domain",
-              "netflix_domain",
-              "twitter_domain",
-              "duolingo_domain",
-              "telegram_domain"
-            ]
+            "rule_set": "google_domain",
+            "invert": true
           }
         ],
-        "action": "route",
+        "outbound": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
+      },
+      {
+        "rule_set": "ai_domain",
+        "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
+      },
+      {
+        "rule_set": "twitter_domain",
+        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
+      },
+      {
+        "rule_set": [
+          "proxy_domain",
+          "pikpak_domain",
+          "github_domain",
+          "google_domain",
+          "spotify_domain",
+          "telegram_domain",
+          "duolingo_domain"
+        ],
         "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
@@ -346,11 +273,6 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "netflix_ip",
-        "action": "route",
-        "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
-      },
-      {
         "rule_set": [
           "google_ip",
           "telegram_ip"
@@ -360,21 +282,25 @@
     ],
     "final": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
     "auto_detect_interface": true,
-    "default_domain_resolver": "default_dns",
     "default_domain_match_strategy": "prefer_fqdn",
-    "rule_set": [
+    "find_process": true,
+    "default_domain_resolver": {
+      "server": "default_dns",
+      "rewrite_ttl": 60,
+      "client_subnet": "223.5.5.5"
+    },
+    "rule_set": [{
+        "tag": "ai_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/ai.srs",
+        "download_detour": "direct"
+      },
       {
         "tag": "anti-ad",
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/anti-ad-sing-box.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "apple_ip",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/apple.srs",
         "download_detour": "direct"
       },
       {
@@ -385,101 +311,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "google_ip",
+        "tag": "apple_ip",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/google.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "google_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/google.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "netflix_ip",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "netflix_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "ai_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/ai.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "proxy_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "spotify_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "telegram_ip",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "telegram_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "tiktok_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/tiktok.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "twitter_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/twitter.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "private_ip",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/privateip.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "private_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/sing-box-ruleset/private.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "youtube_domain",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/youtube.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/apple.srs",
         "download_detour": "direct"
       },
       {
@@ -502,50 +337,134 @@
         "format": "binary",
         "url": "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/cn.srs",
         "download_detour": "direct"
+      },
+      {
+        "tag": "github_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/github.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "google_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/google.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "google_ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/google.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "pikpak_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/PikPak/PikPak.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "private_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/sing-box-ruleset/private.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "private_ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/raw/refs/heads/sing-box-ruleset/privateip.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "proxy_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "spotify_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/spotify.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "telegram_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/telegram.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "telegram_ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geoip/telegram.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "tiktok_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/tiktok.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "twitter_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/twitter.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "youtube_domain",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/youtube.srs",
+        "download_detour": "direct"
       }
     ]
+
   },
-  "outbounds": [
-    {
+  "outbounds": [{
       "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
       "type": "selector",
-      "outbounds": []
+      "outbounds": [],
+      "exclude": "(?i)✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯",
+      "include": "(?i)新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建"
     },
     {
       "tag": "🎧𝕋𝕚𝕜𝕥𝕠𝕜",
       "type": "selector",
-      "outbounds": []
+      "outbounds": [],
+      "exclude": "(?i)✰✰|★★|日本|JP|🇯🇵|微斯",
+      "include": "(?i)台湾|TW|🇹🇼|🇨🇳|自建"
     },
     {
       "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
       "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "🎵𝕊𝕡𝕠𝕥𝕚𝕗𝕪",
-      "type": "urltest",
       "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
+      "exclude": "(?i)微斯",
+      "include": "(?i)美国|US|🇺🇸|新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建"
     },
     {
       "tag": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥",
       "type": "selector",
-      "outbounds": []
+      "outbounds": [],
+      "exclude": "(?i)✰✰|★★|微斯|香港",
+      "include": "(?i)美国|US|🇺🇸|自建"
     },
     {
       "tag": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖",
       "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "🎓𝔻𝕦𝕠𝕝𝕚𝕟𝕘𝕠",
-      "type": "urltest",
       "outbounds": [],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50
+      "exclude": "(?i)✰✰|★★|微斯"
     },
     {
       "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
@@ -558,8 +477,7 @@
       "domain_resolver": "local"
     }
   ],
-  "inbounds": [
-    {
+  "inbounds": [{
       "tag": "tun-in",
       "type": "tun",
       "address": [
@@ -567,7 +485,9 @@
         "fdfe:dcba:9876::1/126"
       ],
       "auto_route": true,
-      "auto_redirect": false,
+      "auto_redirect": true,
+      "stack": "gvisor",
+      "sniff": true,
       "platform": {
         "http_proxy": {
           "enabled": true,
@@ -585,7 +505,7 @@
     }
   ],
   "log": {
-    "level": "warn",
+    "level": "error",
     "timestamp": true
   },
   "experimental": {
@@ -598,7 +518,7 @@
     "clash_api": {
       "external_controller": "[::]:9090",
       "external_ui": "ui",
-      "external_ui_download_url": "ttps://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_url": "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
       "external_ui_update_interval": "24h0m0s"
     }
