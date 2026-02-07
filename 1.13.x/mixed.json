@@ -424,36 +424,27 @@
   "outbounds": [{
       "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
       "type": "selector",
-      "outbounds": [],
-      "exclude": "(?i)✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯",
-      "include": "(?i)新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建"
+      "outbounds": []
     },
     {
       "tag": "🎧𝕋𝕚𝕜𝕥𝕠𝕜",
       "type": "selector",
-      "outbounds": [],
-      "exclude": "(?i)✰✰|★★|日本|JP|🇯🇵|微斯",
-      "include": "(?i)台湾|TW|🇹🇼|🇨🇳|自建"
+      "outbounds": []
     },
     {
       "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
       "type": "selector",
-      "outbounds": [],
-      "exclude": "(?i)微斯",
-      "include": "(?i)美国|US|🇺🇸|新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建"
+      "outbounds": []
     },
     {
       "tag": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥",
       "type": "selector",
-      "outbounds": [],
-      "exclude": "(?i)✰✰|★★|微斯|香港",
-      "include": "(?i)美国|US|🇺🇸|自建"
+      "outbounds": []
     },
     {
       "tag": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖",
       "type": "selector",
-      "outbounds": [],
-      "exclude": "(?i)✰✰|★★|微斯"
+      "outbounds": []
     },
     {
       "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
