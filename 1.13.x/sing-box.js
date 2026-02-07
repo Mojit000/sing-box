@@ -1,11 +1,4 @@
-const argsStr = $arguments || '{}';
-let args;
-try {
-  args = JSON.parse(argsStr);
-} catch (e) {
-  args = {};
-}
-const { type = '1', name = 'General' } = args;
+const { type = '1', name = 'General' } = $arguments
 const compatible_outbound = {
   tag: 'COMPATIBLE',
   type: 'direct',
