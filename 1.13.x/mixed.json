@@ -58,12 +58,10 @@
         "action": "reject"
       },
       {
-        "clash_mode": "Global",
-        "server": "fake_ip"
-      },
-      {
-        "clash_mode": "Direct",
-        "server": "direct_dns"
+        "domain_suffix": [
+          ".arpa"
+        ],
+        "server": "local"
       },
       {
         "query_type": [
@@ -74,20 +72,16 @@
         "rcode": "NOTIMP"
       },
       {
-        "domain_suffix": [
-          ".arpa"
-        ],
-        "server": "local"
+        "clash_mode": "Global",
+        "server": "fake_ip"
       },
       {
-        "rule_set": [
-          "ai_domain",
-          "proxy_domain",
-          "google_domain",
-          "telegram_ip",
-          "telegram_domain"
-        ],
-        "server": "proxy_dns"
+        "clash_mode": "Direct",
+        "server": "direct_dns"
+      },
+      {
+        "rule_set": "fakeip_bypass",
+        "server": "direct_dns"
       },
       {
         "query_type": [
@@ -96,6 +90,30 @@
         ],
         "server": "fake_ip",
         "rewrite_ttl": 0
+      },
+      {
+        "rule_set": [
+          "ai_domain",
+          "proxy_domain",
+          "google_domain",
+          "telegram_domain",
+          "github_domain",
+          "youtube_domain",
+          "twitter_domain",
+          "tiktok_domain",
+          "spotify_domain",
+          "pikpak_domain",
+          "duolingo_domain"
+        ],
+        "server": "proxy_dns"
+      },
+      {
+        "rule_set": [
+          "geosite-cn",
+          "apple_domain",
+          "private_domain"
+        ],
+        "server": "direct_dns"
       }
     ],
     "final": "direct_dns",
@@ -111,9 +129,7 @@
             "ip_version": 6
           },
           {
-            "default_interface_address": [
-              "2000::/3"
-            ],
+            "default_interface_address": ["2000::/3"],
             "invert": true
           }
         ],
@@ -124,10 +140,16 @@
         "action": "hijack-dns"
       },
       {
-        "ip_cidr": [
-          "198.18.0.0/15",
-          "fc00::/18"
-        ],
+        "clash_mode": "Global",
+        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "protocol": "quic",
+        "rule_set": "youtube_domain",
         "action": "reject"
       },
       {
@@ -152,71 +174,36 @@
         "outbound": "direct"
       },
       {
-        "clash_mode": "Global",
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
-      },
-      {
-        "clash_mode": "Direct",
+        "network": "icmp",
         "outbound": "direct"
       },
       {
-        "domain_keyword": [
-          "coolapk"
-        ],
+        "domain_keyword": ["coolapk"],
         "domain_suffix": [
           "qmeng.top",
           "qmeng.xyz",
           "googleapis.cn",
           "xn--ngstr-lra8j.com"
         ],
-        "domain": [
-          "cdn.lilyemby.my"
-        ],
+        "domain": ["cdn.lilyemby.my"],
         "outbound": "direct"
       },
       {
-        "domain_suffix": [
-          "v50.su",
-          "zox.show",
-          "69yun69.com"
-        ],
-        "domain": [
-          "tv.ash.yt",
-          "ask.ash.yt",
-          "emby.oceancloud.asia"
-        ],
+        "domain_suffix": ["v50.su", "zox.show", "69yun69.com"],
+        "domain": ["tv.ash.yt", "ask.ash.yt", "emby.oceancloud.asia"],
         "outbound": "🎬𝕄𝕖𝕕𝕚𝕒"
-      },
-      {
-        "domain_suffix": [
-          "mypikpak.com"
-          ],
-        "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
-      },
-      {
-        "network": "icmp",
-        "outbound": "direct"
-      },
-      {
-        "protocol": "quic",
-        "rule_set": "youtube_domain",
-        "action": "reject"
-      },
-      {
-        "ip_is_private": true,
-        "outbound": "direct"
-      },
-      {
-        "rule_set": [
-          "geosite-cn",
-          "apple_domain",
-          "private_domain"
-        ],
-        "outbound": "direct"
       },
       {
         "rule_set": "tiktok_domain",
         "outbound": "🎧𝕋𝕚𝕜𝕥𝕠𝕜"
+      },
+      {
+        "rule_set": "ai_domain",
+        "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
+      },
+      {
+        "rule_set": "twitter_domain",
+        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
       },
       {
         "type": "logical",
@@ -229,15 +216,15 @@
             "invert": true
           }
         ],
-        "outbound": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖"
+        "outbound": "🎨𝕐𝕠υ𝕋υ𝕓𝕖"
       },
       {
-        "rule_set": "ai_domain",
-        "outbound": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥"
-      },
-      {
-        "rule_set": "twitter_domain",
-        "outbound": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣"
+        "rule_set": [
+          "geosite-cn",
+          "apple_domain",
+          "private_domain"
+        ],
+        "outbound": "direct"
       },
       {
         "rule_set": [
@@ -249,11 +236,16 @@
           "telegram_domain",
           "duolingo_domain"
         ],
+        "domain_suffix": ["mypikpak.com"],
         "outbound": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖"
       },
       {
         "action": "resolve",
         "match_only": true
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
       },
       {
         "rule_set": [
@@ -313,6 +305,13 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/SagerNet/sing-geosite/refs/heads/rule-set/geosite-duolingo.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "fakeip_bypass",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Mojit000/sing-box/refs/heads/main/rules/fakeip_bypass.srs",
         "download_detour": "direct"
       },
       {
@@ -421,7 +420,6 @@
         "download_detour": "direct"
       }
     ]
-
   },
   "outbounds": [{
       "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
@@ -475,8 +473,10 @@
         "172.19.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
+      "mtu": 1400,
       "auto_route": true,
       "auto_redirect": true,
+      "strict_route": true,
       "stack": "gvisor",
       "sniff": true,
       "sniff_override_destination": true,
@@ -504,8 +504,9 @@
     "urltest_unified_delay": true,
     "cache_file": {
       "enabled": true,
-      "store_fakeip": true,
-      "store_rdrc": true
+      "store_fakeip": false,
+      "store_rdrc": true,
+      "rdrc_timeout": "7d"
     },
     "clash_api": {
       "external_controller": "[::]:9090",
