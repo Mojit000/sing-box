@@ -1,4 +1,5 @@
-const { type = '1', name = 'General' } = $arguments
+const args = $arguments ? JSON.parse($arguments) : {};
+const { type = '1', name = 'General' } = args;
 const compatible_outbound = {
   tag: 'COMPATIBLE',
   type: 'direct',
