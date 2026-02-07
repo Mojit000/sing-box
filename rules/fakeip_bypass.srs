@@ -1,18 +1,23 @@
-# 支付/网银 fakeip 排除规则（仅域名）
-# 招商银行、建设银行、中国银行、交通银行、支付宝、微信支付、云闪付、京东支付、白条
-
-DOMAIN-SUFFIX,alipay.com
-DOMAIN-SUFFIX,alipayobjects.com
-DOMAIN-SUFFIX,pay.weixin.qq.com
-DOMAIN-SUFFIX,wx.tenpay.com
-DOMAIN-SUFFIX,95516.com
-DOMAIN-SUFFIX,jd.com
-DOMAIN-SUFFIX,jdai.jd.com
-DOMAIN-SUFFIX,cmbchina.com
-DOMAIN-SUFFIX,cmbchina.com.cn
-DOMAIN-SUFFIX,cmbc.com.cn
-DOMAIN-SUFFIX,bankcomm.com
-DOMAIN-SUFFIX,boc.cn
-DOMAIN-SUFFIX,bankofchina.com
-DOMAIN-KEYWORD,yunshanfu
-DOMAIN-KEYWORD,unionpay
+[
+  {
+    "domain_suffix": [
+      "alipay.com",
+      "alipayobjects.com",
+      "pay.weixin.qq.com",
+      "wx.tenpay.com",
+      "95516.com",
+      "jd.com",
+      "jdai.jd.com",
+      "cmbchina.com",
+      "cmbchina.com.cn",
+      "cmbc.com.cn",
+      "bankcomm.com",
+      "boc.cn",
+      "bankofchina.com"
+    ],
+    "domain_keyword": [
+      "yunshanfu",
+      "unionpay"
+    ]
+  }
+]
