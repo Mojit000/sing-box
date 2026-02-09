@@ -301,7 +301,7 @@
     "default_domain_resolver": {
       "server": "default_dns",
       "rewrite_ttl": 60,
-      "client_subnet": "223.5.5.5"
+      "client_subnet": "223.5.5.5/24"
     },
     "rule_set": [{
         "tag": "ai_domain",
