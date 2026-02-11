@@ -32,7 +32,7 @@ config.outbounds.map(i => {
     i.outbounds.push(...getTags(proxies,  /^(?!.*(?:微斯)).*(?:美国|US|🇺🇸|香港|🇭🇰|新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|日本|🇯🇵|自建).*$/i))
   }
   if (['🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /(?:新加坡|SG|🇸🇬|香港|🇭🇰|台湾|🇹🇼|日本|🇯🇵|自建).*$/i))
+    i.outbounds.push(...getTags(proxies, /(?:美国|US|🇺🇸|新加坡|SG|🇸🇬|香港|🇭🇰|台湾|🇹🇼|日本|🇯🇵|自建).*$/i))
   }
   // if (['☁️ℙ𝕚𝕜ℙ𝕒𝕜'].includes(i.tag)) {
   //   i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯)).*(?:新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
