@@ -32,7 +32,7 @@ config.outbounds.map(i => {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|日本|JP|🇯🇵|微斯)).*(?:台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
   }
   if (['🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:微斯)).*(?:美国|US|🇺🇸新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:微斯)).*(?:美国|US|新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
   }
   if (['🎬𝕄𝕖𝕕𝕚𝕒'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯)).*(?:新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
