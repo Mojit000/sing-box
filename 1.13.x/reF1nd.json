@@ -189,7 +189,10 @@
       },
       {
         "protocol": "quic",
-        "rule_set": "youtube_domain",
+        "action": "reject"
+      },
+      {
+        "rule_set": "anti-ad",
         "action": "reject"
       },
       {
@@ -314,7 +317,7 @@
         "tag": "anti-ad",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/privacy-protection-tools/anti-ad.github.io/master/docs/anti-ad-sing-box.srs",
+        "url": "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ads.srs",
         "download_detour": "direct"
       },
       {
@@ -342,7 +345,7 @@
         "tag": "fakeip_bypass",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/Mojit000/sing-box/refs/heads/main/rules/fakeip_bypass.srs",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Mojit000/sing-box/refs/heads/main/rules/fakeip_bypass.srs",
         "download_detour": "direct"
       },
       {
