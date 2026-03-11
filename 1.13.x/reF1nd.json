@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": "warn",
+    "level": "error",
     "timestamp": true
   },
   "dns": {
@@ -221,7 +221,6 @@
         "outbound": "direct"
       },
       {
-        "domain_keyword": ["coolapk"],
         "domain_suffix": [
           "qmeng.top",
           "qmeng.xyz",
@@ -458,31 +457,37 @@
   "outbounds": [{
       "tag": "🎬𝕄𝕖𝕕𝕚𝕒",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "🎧𝕋𝕚𝕜𝕥𝕠𝕜",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "🐳𝕋𝕨𝕚𝕥𝕥𝕖𝕣",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "🤖𝔸𝕚𝔸𝕘𝕖𝕟𝕥",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
       "tag": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": []
     },
     {
@@ -502,6 +507,9 @@
     "clash_api": {
       "external_controller": "[::]:9090",
       "external_ui": "ui",
+      "default_mode": "Rule",
+      "access_control_allow_origin": ["*"],
+      "access_control_allow_private_network": false,
       "external_ui_download_url": "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖",
       "external_ui_update_interval": "24h0m0s"
