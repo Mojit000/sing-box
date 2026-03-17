@@ -17,7 +17,7 @@ config.outbounds.push(...proxies)
 
 config.outbounds.map(i => {
   if (['🎬𝕄𝕖𝕕𝕚𝕒'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|美国|日本|🇯🇵)).*(?:新加坡|🇸🇬|台湾|🇹🇼|自建|🇨🇳).*$/i))
+    i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|美国|🇺🇸|日本|🇯🇵|香港|🇭🇰)).*(?:新加坡|🇸🇬|台湾|🇹🇼|自建|🇨🇳).*$/i))
   }
   if (['🎧𝕋𝕚𝕜𝕥𝕠𝕜'].includes(i.tag)) {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|日本|🇯🇵)).*(?:美国|🇺🇸|台湾|🇹🇼|新加坡|🇸🇬|自建|🇨🇳).*$/i))
@@ -29,10 +29,10 @@ config.outbounds.map(i => {
     i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★)).*(?:美国|🇺🇸|自建|🇨🇳).*$/i))
   }
   if (['🎨𝕐𝕠𝕦𝕋𝕦𝕓𝕖'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies,  /^(?!.*(?:✰✰|★★)).*(?:美国|US|🇺🇸|香港|🇭🇰|新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|日本|🇯🇵|自建).*$/i))
+    i.outbounds.push(...getTags(proxies,  /^(?!.*(?:✰✰|★★)).*(?:美国|🇺🇸|香港|🇭🇰|新加坡|🇸🇬|台湾|🇹🇼|日本|🇯🇵|自建).*$/i))
   }
   if (['🍀𝕌𝕝𝕥𝕚𝕞𝕒𝕥𝕖'].includes(i.tag)) {
-    i.outbounds.push(...getTags(proxies, /.*(?:美国|🇺🇸|新加坡|🇸🇬|香港|🇭🇰|台湾|🇹🇼|日本|🇯🇵|自建|🇨🇳|俄罗斯).*$/i))
+    i.outbounds.push(...getTags(proxies, /(?:美国|🇺🇸|新加坡|🇸🇬|香港|🇭🇰|台湾|🇹🇼|日本|🇯🇵|自建|🇨🇳|俄罗斯|🇷🇺|澳门|🇲🇴).*$/i))
   }
   // if (['☁️ℙ𝕚𝕜ℙ𝕒𝕜'].includes(i.tag)) {
   //   i.outbounds.push(...getTags(proxies, /^(?!.*(?:✰✰|★★|美国|US|🇺🇸|日本|JP|🇯🇵|微斯)).*(?:新加坡|SG|🇸🇬|台湾|TW|🇹🇼|🇨🇳|自建).*$/i))
